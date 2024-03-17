@@ -7,11 +7,22 @@ let numeroTurno = 0
 let turnosAtendidosBuenaGente = 0
 let turnosAtendidosClienteNormal = 0
 
+export function buscarTurnoPerdido(buscar) {
+    let turno = {
+        numeroTurno: "No hay Turnos en Cola"
+    }
+    console.log("buscar", buscar)
+    const encontrado = turnosLlamados.find(turnosLlamado => turnosLlamado.numeroTurno == buscar)
+    if (encontrado) {
+        return encontrado
+    } else {
+        return turno
+    }
+}
 
 export function cambiarEstado(turno, estado) {
-    if(turno.numeroTurno != "No  hay turno en cola") {
+    if (turno.numeroTurno != "No  hay turno en cola") {
         turno.estado = estado
-       
     }
 }
 
