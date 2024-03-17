@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowDownIcon } from '@heroicons/react/outline';
-import { pedirTurno } from '../api/turnos';
+import { pedirTurno } from '../api/logica';
+import { Link } from 'react-router-dom'
 
 function Turnos() {
   const [showModal, setShowModal] = useState(false);
@@ -43,8 +44,15 @@ function Turnos() {
             <p>Categoria: {turno.tipo} </p>
             <p>Fecha: {turno.fechaSolitud.toString()} </p>
             <div className='flex gap-3'>
-              <button className="mt-4 bg-blue-500 text-white rounded-lg px-4 py-2" onClick={handleCloseModal}>Cerrar</button>
-              <button className="mt-4 bg-blue-500 text-white rounded-lg px-4 py-2" onClick={handleCloseModal}>Imprimir</button>
+              <button className="mt-4 bg-blue-500 text-white rounded-lg px-4 py-2"
+                onClick={handleCloseModal}>Cerrar</button>
+              <button className="mt-4 bg-blue-500 text-white rounded-lg px-4 py-2"
+                onClick={handleCloseModal}>Imprimir</button>
+              <Link to='/pantalla'>
+                <button className="mt-4 bg-blue-500 text-white rounded-lg px-4 py-2"
+                >Ir a pantalla de turnos</button>
+              </Link>
+
             </div>
           </div>
         </div>

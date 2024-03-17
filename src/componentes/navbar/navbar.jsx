@@ -24,6 +24,15 @@ function Navbar() {
                         TURNOS
                     </NavLink>
                 </li>
+                <li className="font-semibold text-lg text-center rounded-lg border border-black w-50 p-4 mb-4">
+                    <NavLink
+                        to="/pantalla"
+                        className={({ isActive }) =>
+                            isActive ? activeStyle : undefined
+                        }>
+                        PANTALLA DE TURNOS
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     )
