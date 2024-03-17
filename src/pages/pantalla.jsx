@@ -20,6 +20,7 @@ function Pantalla() {
                         <li key={index} className="text-lg py-2">
                             <div className='bg-green-500 rounded-lg p-4'>
                                 <p className='font-bold'>Numero de turno: {item.numeroTurno}</p>
+                                <p>Estado: {item.estado} </p>
                                 <p>Asesor: Juan</p>
                                 <p>Módulo 4</p>
                             </div>

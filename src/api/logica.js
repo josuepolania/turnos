@@ -8,8 +8,21 @@ let turnosAtendidosBuenaGente = 0
 let turnosAtendidosClienteNormal = 0
 
 
+export function cambiarEstado(turno, estado) {
+    if(turno.numeroTurno != "No  hay turno en cola") {
+        turno.estado = estado
+       
+    }
+}
+
+export function volverAllamarTurnoPerdido(turno) {
+    if (turno.numeroTurno != "No hay Turnos en Cola") {
+        turno.estado = "VUELTO A LLAMAR"
+        turnosLlamados.unshift(turno)
+    }
+}
+
 export function obtenerTurnosLlamados() {
-    
     return turnosLlamados
 }
 
@@ -41,6 +54,8 @@ export function llamarTurno() {
 
         }
     }
+
+    turno.estado = "LLAMADO"
 
     return turno
 

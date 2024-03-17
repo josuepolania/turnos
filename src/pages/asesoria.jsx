@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { ArrowDownIcon } from '@heroicons/react/outline';
-import { llamarTurno } from '../api/logica';
+import { llamarTurno, volverAllamarTurnoPerdido, cambiarEstado } from '../api/logica';
+
 
 
 function Asesoria() {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false); 
   const [turno, setTurno] = useState({});
 
   const handleLlamarTurno = () => {
@@ -13,9 +14,15 @@ function Asesoria() {
     setShowModal(true)
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (estado) => {
+    cambiarEstado(turno, estado)
     setShowModal(false);
   };
+
+  const volverAllamar = () =>  {
+    volverAllamarTurnoPerdido(turno)
+  }
+
 
   return (
     <div className="flex justify-center items-center h-screen">
@@ -40,11 +47,11 @@ function Asesoria() {
             <p>Nombre de Asesor: juan </p>
             <div className='flex gap-3'>
               <button className="mt-4 bg-blue-500 text-white rounded-lg px-4 py-2"
-                onClick={handleCloseModal}>Atendido</button>
+                onClick={() => handleCloseModal("TERMINADO")}>Terminado</button>
               <button className="mt-4 bg-blue-500 text-white rounded-lg px-4 py-2"
-                onClick={handleCloseModal}>Volver a llamar</button>
+                onClick={volverAllamar}>Volver a llamar</button>
               <button className="mt-4 bg-blue-500 text-white rounded-lg px-4 py-2"
-                onClick={handleCloseModal}>No atendido</button>
+                onClick={() => handleCloseModal("NO ATENDIDO")}>No atendido</button>
             </div>
 
           </div>
