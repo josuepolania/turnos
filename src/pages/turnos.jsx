@@ -42,7 +42,7 @@ function Turnos() {
           <div className="bg-gray-300 p-8 rounded-lg">
             <p className='flex text-lg font-bold'>Numero: {turno.numeroTurno} </p>
             <p>Categoria: {turno.tipo} </p>
-            <p>Fecha: {turno.fechaSolitud.toString()} </p>
+            <p>Fecha: {turno.horaInicio.toString()} </p>
             <div className='flex gap-3'>
               <button className="mt-4 bg-blue-500 text-white rounded-lg px-4 py-2"
                 onClick={handleCloseModal}>Cerrar</button>
@@ -62,3 +62,4 @@ function Turnos() {
 }
 
 export default Turnos;
+

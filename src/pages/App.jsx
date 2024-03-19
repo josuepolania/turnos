@@ -3,6 +3,7 @@ import Asesoria from "./asesoria"
 import Turnos from "./turnos"
 import Pantalla from "./pantalla"
 import Inicio from "./inicio"
+import Reportes from "./reportes"
 import Navbar from "../componentes/navbar/navbar"
 
 const AppRoutes = () => {
@@ -22,6 +23,10 @@ const AppRoutes = () => {
     {
       path: '/pantalla',
       element: <Pantalla />
+    },
+    {
+      path: '/reportes',
+      element: <Reportes />
     },
     {
       path: '/*',

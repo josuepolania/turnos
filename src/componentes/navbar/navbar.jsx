@@ -33,6 +33,15 @@ function Navbar() {
                         PANTALLA DE TURNOS
                     </NavLink>
                 </li>
+                <li className="font-semibold text-lg text-center rounded-lg border border-black w-50 p-4 mb-4">
+                    <NavLink
+                        to="/reportes"
+                        className={({ isActive }) =>
+                            isActive ? activeStyle : undefined
+                        }>
+                        REPORTES
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     )
