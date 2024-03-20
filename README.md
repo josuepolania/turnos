@@ -6,6 +6,9 @@ El Sistema de Turnos es una aplicación diseñada para gestionar y asignar turno
 
 Puedes probar una demostración de la aplicación en vivo aquí https://asesorias-app.netlify.app/
 
+Página principal de la aplicación recursos/paginaPrincipal.png
+
+
 # Funcionalidades
 Asignación de Turno según Categorías: Los clientes pueden ser clasificados en tres categorías: prioritario, buena gente y cliente normal. El sistema asigna automáticamente un número de turno a cada cliente según su categoría.
 
