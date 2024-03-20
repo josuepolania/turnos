@@ -2,6 +2,10 @@
 
 El Sistema de Turnos es una aplicación diseñada para gestionar y asignar turnos de atención a clientes de manera equitativa y eficiente. Permite clasificar a los clientes en tres categorías: prioritario, buena gente y cliente normal, asignándoles un número de turno correspondiente. Los turnos son atendidos en orden, garantizando una atención justa para todos los clientes.
 
+#Demo.
+
+Puedes probar una demostración de la aplicación en vivo aquí https://asesorias-app.netlify.app/
+
 # Funcionalidades
 Asignación de Turno según Categorías: Los clientes pueden ser clasificados en tres categorías: prioritario, buena gente y cliente normal. El sistema asigna automáticamente un número de turno a cada cliente según su categoría.
 
@@ -19,11 +23,38 @@ Marcar como No Atendido: Si un cliente no se presenta después de ser llamado va
 
 Marcar como Terminado: Una vez que se ha atendido al cliente, el asesor puede marcar su turno como terminado para liberar la atención para el siguiente cliente.
 
-#Demo
-Puedes probar una demostración de la aplicación en vivo aquí https://asesorias-app.netlify.app/
+# Instalación
 
-#Deploy
-La aplicación ha sido desplegada utilizando Netlify, lo que facilita su implementación y distribución
+Para instalar y ejecutar el Sistema de Turnos en tu sistema local, sigue estos pasos:
+
+1. Clona este repositorio en tu máquina local ejecutando el siguiente comando en tu terminal:
+
+    git clone https://github.com/josuepolania/turnos.git
+
+    Este comando descargará el código fuente del proyecto en tu computadora.
+
+2. Navega al directorio del proyecto recién clonado ejecutando:
+   
+    cd turnos
+
+    Esto te llevará al directorio del proyecto donde podrás trabajar con los archivos.
+
+4. Instala las dependencias del proyecto ejecutando:
+
+    npm install
+
+5. Finalmente, para iniciar la aplicación en un entorno de desarrollo, ejecuta:
+
+    npm run dev
+
+    Esto iniciará el servidor de desarrollo y podrás acceder a la aplicación en tu navegador web.
+
+¡Listo! Ahora el Sistema de Turnos debería estar funcionando en tu máquina local.
+
+
+#Deploy.
+
+La aplicación ha sido desplegada utilizando Netlify, lo que facilita su implementación y distribución.
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
