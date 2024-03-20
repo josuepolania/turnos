@@ -12,8 +12,11 @@ Cola de Turnos Llamados: Los turnos llamados por los asesores se muestran en una
 # Funcionalidades para Asesores:
 
 Llamado de Turno: Los asesores pueden llamar al siguiente turno en la cola para ser atendido.
+
 Volver a Llamar: En caso de que un cliente no se presente al ser llamado, el asesor puede volver a llamar su turno.
+
 Marcar como No Atendido: Si un cliente no se presenta después de ser llamado varias veces, el asesor puede marcar su turno como no atendido para pasar al siguiente.
+
 Marcar como Terminado: Una vez que se ha atendido al cliente, el asesor puede marcar su turno como terminado para liberar la atención para el siguiente cliente.
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
