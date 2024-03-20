@@ -19,5 +19,11 @@ Marcar como No Atendido: Si un cliente no se presenta después de ser llamado va
 
 Marcar como Terminado: Una vez que se ha atendido al cliente, el asesor puede marcar su turno como terminado para liberar la atención para el siguiente cliente.
 
+#Demostración
+Puedes probar una demostración de la aplicación en vivo aquí https://asesorias-app.netlify.app/
+
+#Deploy
+La aplicación ha sido desplegada utilizando Netlify, lo que facilita su implementación y distribución
+
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
