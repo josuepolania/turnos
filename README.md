@@ -6,7 +6,9 @@ El Sistema de Turnos es una aplicación diseñada para gestionar y asignar turno
 
 Puedes probar una demostración de la aplicación en vivo aquí https://asesorias-app.netlify.app/
 
-Página principal de la aplicación recursos/paginaPrincipal.png
+Página principal de la aplicación 
+(recursos/paginaPrincipal.png)
+
 
 
 # Funcionalidades
