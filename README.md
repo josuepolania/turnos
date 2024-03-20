@@ -19,7 +19,7 @@ Marcar como No Atendido: Si un cliente no se presenta después de ser llamado va
 
 Marcar como Terminado: Una vez que se ha atendido al cliente, el asesor puede marcar su turno como terminado para liberar la atención para el siguiente cliente.
 
-#Demostración
+#Demo
 Puedes probar una demostración de la aplicación en vivo aquí https://asesorias-app.netlify.app/
 
 #Deploy
