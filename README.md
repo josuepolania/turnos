@@ -1,8 +1,20 @@
-# React + Vite
-Sistema de turnos
+# Sistema de Turnos.
 
-Asigna un número de turno a clientes según tres categorías: prioritario, buena gente y cliente normal.
-Permite asignar y llamar los turnos en orden, garantizando una atención equitativa y eficiente.
+El Sistema de Turnos es una aplicación diseñada para gestionar y asignar turnos de atención a clientes de manera equitativa y eficiente. Permite clasificar a los clientes en tres categorías: prioritario, buena gente y cliente normal, asignándoles un número de turno correspondiente. Los turnos son atendidos en orden, garantizando una atención justa para todos los clientes.
+
+# Funcionalidades
+Asignación de Turno según Categorías: Los clientes pueden ser clasificados en tres categorías: prioritario, buena gente y cliente normal. El sistema asigna automáticamente un número de turno a cada cliente según su categoría.
+
+Visualización de Turnos en Pantalla: La aplicación muestra en pantalla la información de los turnos asignados, incluyendo el número de turno y el tiempo estimado de atención. Esto permite a los clientes conocer su posición en la cola de espera y planificar su tiempo de manera adecuada.
+
+Cola de Turnos Llamados: Los turnos llamados por los asesores se muestran en una cola, lo que facilita el seguimiento del orden de atención y ayuda a evitar confusiones.
+
+# Funcionalidades para Asesores:
+
+Llamado de Turno: Los asesores pueden llamar al siguiente turno en la cola para ser atendido.
+Volver a Llamar: En caso de que un cliente no se presente al ser llamado, el asesor puede volver a llamar su turno.
+Marcar como No Atendido: Si un cliente no se presenta después de ser llamado varias veces, el asesor puede marcar su turno como no atendido para pasar al siguiente.
+Marcar como Terminado: Una vez que se ha atendido al cliente, el asesor puede marcar su turno como terminado para liberar la atención para el siguiente cliente.
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
