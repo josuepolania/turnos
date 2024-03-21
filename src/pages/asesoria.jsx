@@ -61,7 +61,7 @@ function Asesoria() {
         <div className="fixed inset-0 flex items-center justify-center bg-opacity-50">
           <div className="bg-gray-300 p-8 rounded-lg">
             <p className='flex text-lg font-bold'>Turno Llamado: {turno.numeroTurno} </p>
-            <p>Nombre de Asesor: juan </p>
+            <p>Nombre de Asesor: {turno.asesor}</p>
             <div className='flex gap-3'>
               <button className="mt-4 bg-blue-500 text-white rounded-lg px-4 py-2"
                 onClick={() => handleCloseModal("TERMINADO")}>Terminado</button>

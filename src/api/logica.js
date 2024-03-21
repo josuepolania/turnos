@@ -3,8 +3,15 @@ import { addTurno, removerPrimerTurno, getTurnos, setTurnos, getNumeroTurno, rei
 
 let turnosAtendidosBuenaGente = 0
 let turnosAtendidosClienteNormal = 0
+const asesores = ["Asesor 1", "Asesor 2", "Asesor 3", "Asesor 4"]
 
 reinicioDiario()
+
+function obtenerAsesor() {
+    let asesor = asesores[Math.floor(Math.random() * asesores.length)]
+    return asesor
+
+}
 
 export function calcularDuracionTurno(turno) {
     const duracionTurno = (turno.horaFin.getTime() - turno.horaInicio.getTime()) / (1000 * 60);
@@ -68,11 +75,12 @@ export function obtenerTurnosLlamados() {
 export function llamarTurno() {
     let turno = {
         numeroTurno: "No hay Turnos en Cola",
-        estado: "LLAMADO"
+        estado: "LLAMADO",
     }
     if (getTurnos('turnosPrioritario').length > 0) {
         console.log("atender prioritario")
         turno = removerPrimerTurno('turnosPrioritario')
+        turno.asesor = obtenerAsesor()
         addTurno('turnosLlamados', turno)
 
     } else {
@@ -83,15 +91,16 @@ export function llamarTurno() {
                 console.log("los turnos atendios es menor a 3")
                 console.log("Atender buena gente")
                 turno = removerPrimerTurno('turnosBuenaGente')
+                turno.asesor = obtenerAsesor()
                 addTurno('turnosLlamados', turno)
                 turnosAtendidosBuenaGente = turnosAtendidosBuenaGente + 1
             } else {
                 console.log("no los turnos son mayores")
-                turno = atenderGenteNormal()
+                turno = atenderGenteNormal(turno)
             }
         } else {
             console.log("no hay gente en la fila buena gente")
-            turno = atenderGenteNormal()
+            turno = atenderGenteNormal(turno)
         }
     }
 
@@ -99,16 +108,15 @@ export function llamarTurno() {
 
 }
 
-function atenderGenteNormal() {
-    let turno = {
-        numeroTurno: "No hay Turnos en Cola"
-    }
+function atenderGenteNormal(turno) {
+
     if (getTurnos("turnosClienteNormal").length > 0) {
         console.log("si hay gente en turno cliente normal")
         console.log("atender gente cliente normal")
         if (turnosAtendidosClienteNormal < 2) {
             console.log("si el contador de cliente normal es menor a 2")
             turno = removerPrimerTurno("turnosClienteNormal")
+            turno.asesor = obtenerAsesor()
             addTurno("turnosLlamados", turno)
             turnosAtendidosClienteNormal = turnosAtendidosClienteNormal + 1
         } else {
@@ -120,6 +128,7 @@ function atenderGenteNormal() {
             } else {
                 turnosAtendidosClienteNormal = turnosAtendidosClienteNormal + 1
                 turno = removerPrimerTurno("turnosClienteNormal")
+                turno.asesor = obtenerAsesor()
                 addTurno("turnosLlamados", turno)
             }
 

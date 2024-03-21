@@ -21,8 +21,7 @@ function Pantalla() {
                             <div className='bg-green-500 rounded-lg p-4'>
                                 <p className='font-bold'>Numero de turno: {item.numeroTurno}</p>
                                 <p>Estado: {item.estado} </p>
-                                <p>Asesor: Juan</p>
-                                <p>Módulo 4</p>
+                                <p>Asesor: {item.asesor}</p>
                             </div>
                         </li>
                     ))}
