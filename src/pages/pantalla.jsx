@@ -6,7 +6,7 @@ function Pantalla() {
     useEffect(() => {
         const obtenerTurnos = obtenerTurnosLlamados()
         setTurnosLlamados(obtenerTurnos)
-    })
+    }, [])
 
     return (
         <div className="p-4 flex flex-col justify-center items-center gap-4 py-10">

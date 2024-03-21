@@ -1,11 +1,10 @@
 
-const turnosPrioritario = []
-const turnosBuenaGente = []
-const turnosClienteNormal = []
-const turnosLlamados = []
-let numeroTurno = 0
+import { addTurno, removerPrimerTurno, getTurnos, setTurnos, getNumeroTurno, reinicioDiario } from './storage'
+
 let turnosAtendidosBuenaGente = 0
 let turnosAtendidosClienteNormal = 0
+
+reinicioDiario()
 
 export function calcularDuracionTurno(turno) {
     const duracionTurno = (turno.horaFin.getTime() - turno.horaInicio.getTime()) / (1000 * 60);
@@ -15,6 +14,7 @@ export function calcularDuracionTurno(turno) {
 export function calcularTiempoPromedio() {
     const categorias = ['prioritario', 'buenaGente', 'clienteNormal'];
     const promediosPorCategoria = {};
+    const turnosLlamados = getTurnos('turnosLlamados');
     categorias.forEach(categoria => {
         const turnosCategoria = turnosLlamados.filter(turno => turno.tipo === categoria && turno.estado === 'TERMINADO');
         const duraciones = turnosCategoria.map(turno => calcularDuracionTurno(turno));
@@ -25,12 +25,13 @@ export function calcularTiempoPromedio() {
 }
 
 
-export function buscarTurnoPerdido(buscar) {
+export function buscarTurnoPerdido(buscarNumeroTurno) {
     let turno = {
         numeroTurno: "No hay Turnos en Cola"
     }
-    console.log("buscar", buscar)
-    const encontrado = turnosLlamados.find(turnosLlamado => turnosLlamado.numeroTurno == buscar)
+    console.log("buscar", buscarNumeroTurno)
+    const turnosLlamados = getTurnos('turnosLlamados');
+    const encontrado = turnosLlamados.find(turnosLlamado => turnosLlamado.numeroTurno == buscarNumeroTurno)
     if (encontrado) {
         return encontrado
     } else {
@@ -40,41 +41,49 @@ export function buscarTurnoPerdido(buscar) {
 
 export function cambiarEstado(turno, estado) {
     if (turno.numeroTurno != "No  hay turno en cola") {
-        if (estado == "TERMINADO") {
-            turno.horaFin = new Date();
-        }
-        turno.estado = estado
+        const turnosLlamados = getTurnos('turnosLlamados')
+        turnosLlamados.forEach((turnoLlamado) => {
+            if (turnoLlamado.numeroTurno == turno.numeroTurno) {
+                turnoLlamado.estado = estado
+                if (estado == "TERMINADO") {
+                    turnoLlamado.horaFin = new Date();
+                }
+            }
+        })
+        setTurnos('turnosLlamados', turnosLlamados)
     }
 }
 
 export function volverAllamarTurnoPerdido(turno) {
     if (turno.numeroTurno != "No hay Turnos en Cola") {
         turno.estado = "VUELTO A LLAMAR"
-        turnosLlamados.unshift(turno)
+        addTurno('turnosLlamados', turno)
     }
 }
 
 export function obtenerTurnosLlamados() {
-    return turnosLlamados
+    return getTurnos('turnosLlamados')
 }
 
 export function llamarTurno() {
     let turno = {
-        numeroTurno: "No hay Turnos en Cola"
+        numeroTurno: "No hay Turnos en Cola",
+        estado: "LLAMADO"
     }
-    if (turnosPrioritario.length > 0) {
+    if (getTurnos('turnosPrioritario').length > 0) {
         console.log("atender prioritario")
-        turno = turnosPrioritario.shift()
-        turnosLlamados.unshift(turno)
+        turno = removerPrimerTurno('turnosPrioritario')
+        addTurno('turnosLlamados', turno)
+
     } else {
         console.log("no hay gente en el prioritario")
-        if (turnosBuenaGente.length > 0) {
+        if (getTurnos("turnosBuenaGente").length > 0) {
             console.log("atender buena gente")
-            if (turnosAtendidosBuenaGente < 3 || turnosClienteNormal.length == 0) {
+            if (turnosAtendidosBuenaGente < 3 || getTurnos("turnosClienteNormal").length == 0) {
                 console.log("los turnos atendios es menor a 3")
                 console.log("Atender buena gente")
-                turno = turnosBuenaGente.shift()
-                turnosLlamados.unshift(turno)
+                turno = removerPrimerTurno('turnosBuenaGente')
+                addTurno('turnosLlamados', turno)
                 turnosAtendidosBuenaGente = turnosAtendidosBuenaGente + 1
             } else {
                 console.log("no los turnos son mayores")
@@ -83,11 +92,8 @@ export function llamarTurno() {
         } else {
             console.log("no hay gente en la fila buena gente")
             turno = atenderGenteNormal()
-
         }
     }
-
-    turno.estado = "LLAMADO"
 
     return turno
 
@@ -97,24 +103,24 @@ function atenderGenteNormal() {
     let turno = {
         numeroTurno: "No hay Turnos en Cola"
     }
-    if (turnosClienteNormal.length > 0) {
+    if (getTurnos("turnosClienteNormal").length > 0) {
         console.log("si hay gente en turno cliente normal")
         console.log("atender gente cliente normal")
         if (turnosAtendidosClienteNormal < 2) {
             console.log("si el contador de cliente normal es menor a 2")
-            turno = turnosClienteNormal.shift()
-            turnosLlamados.unshift(turno)
+            turno = removerPrimerTurno("turnosClienteNormal")
+            addTurno("turnosLlamados", turno)
             turnosAtendidosClienteNormal = turnosAtendidosClienteNormal + 1
         } else {
-            if (turnosBuenaGente.length > 0) {
-                turno = turnosBuenaGente.shift()
-                turnosLlamados.unshift(turno)
+            if (getTurnos("turnosBuenaGente").length > 0) {
+                turno = removerPrimerTurno("turnosBuenaGente")
+                addTurno("turnosLlamados", turno)
                 turnosAtendidosBuenaGente = 1
                 turnosAtendidosClienteNormal = 0
             } else {
                 turnosAtendidosClienteNormal = turnosAtendidosClienteNormal + 1
-                turno = turnosClienteNormal.shift()
-                turnosLlamados.unshift(turno)
+                turno = removerPrimerTurno("turnosClienteNormal")
+                addTurno("turnosLlamados", turno)
             }
 
         }
@@ -127,20 +133,24 @@ function atenderGenteNormal() {
 }
 
 export function pedirTurno(tipo) {
-    numeroTurno = numeroTurno + 1
+    const numeroTurno = getNumeroTurno()
     const turno = {
         numeroTurno: numeroTurno,
         horaInicio: new Date(),
         tipo: tipo
     }
     if (tipo == "prioritario") (
-        turnosPrioritario.push(turno)
+        addTurno('turnosPrioritario', turno)
     )
     if (tipo == "buenaGente") (
-        turnosBuenaGente.push(turno)
+        addTurno('turnosBuenaGente', turno)
     )
     if (tipo == "clienteNormal") (
-        turnosClienteNormal.push(turno)
+        addTurno('turnosClienteNormal', turno)
     )
+
     return turno
 }
+
+
+
