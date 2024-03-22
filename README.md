@@ -33,24 +33,29 @@ Marcar como Terminado: Una vez que se ha atendido al cliente, el asesor puede ma
 Para instalar y ejecutar el Sistema de Turnos en tu sistema local, sigue estos pasos:
 
 1. Clona este repositorio en tu máquina local ejecutando el siguiente comando en tu terminal:
-
+    ```
     git clone https://github.com/josuepolania/turnos.git
+    ```
 
     Este comando descargará el código fuente del proyecto en tu computadora.
 
 2. Navega al directorio del proyecto recién clonado ejecutando:
-   
+    ```
     cd turnos
+    ```
 
     Esto te llevará al directorio del proyecto donde podrás trabajar con los archivos.
 
 4. Instala las dependencias del proyecto ejecutando:
-
+    ```
     npm install
+    ```
 
 5. Finalmente, para iniciar la aplicación en un entorno de desarrollo, ejecuta:
 
+    ```
     npm run dev
+    ```
 
     Esto iniciará el servidor de desarrollo y podrás acceder a la aplicación en tu navegador web.
 
