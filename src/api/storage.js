@@ -8,9 +8,15 @@ export function setTurnos(key, turnos){
     localStorage.setItem(key, JSON.stringify(turnos))
 }
 
-export function addTurno(key, turno){
+export function agregarFinalCola(key, turno){
     const turnos = getTurnos(key)
     turnos.push(turno)
+    localStorage.setItem(key, JSON.stringify(turnos))
+}
+
+export function agregarInicioCola(key, turno){
+    const turnos = getTurnos(key)
+    turnos.unshift(turno)
     localStorage.setItem(key, JSON.stringify(turnos))
 }
 

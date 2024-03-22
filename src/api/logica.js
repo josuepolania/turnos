@@ -1,19 +1,28 @@
 
-import { addTurno, removerPrimerTurno, getTurnos, setTurnos, getNumeroTurno, reinicioDiario } from './storage'
+import {
+    agregarFinalCola,
+    agregarInicioCola,
+    removerPrimerTurno,
+    getTurnos,
+    setTurnos,
+    getNumeroTurno,
+    reinicioDiario
+} from './storage'
+
+reinicioDiario()
 
 let turnosAtendidosBuenaGente = 0
 let turnosAtendidosClienteNormal = 0
 const asesores = ["Asesor 1", "Asesor 2", "Asesor 3", "Asesor 4"]
 
-reinicioDiario()
-
 function obtenerAsesor() {
     let asesor = asesores[Math.floor(Math.random() * asesores.length)]
     return asesor
-
 }
 
 export function calcularDuracionTurno(turno) {
+    turno.horaInicio = new Date(turno.horaInicio);
+    turno.horaFin = new Date(turno.horaFin);
     const duracionTurno = (turno.horaFin.getTime() - turno.horaInicio.getTime()) / (1000 * 60);
     return duracionTurno;
 }
@@ -64,7 +73,7 @@ export function cambiarEstado(turno, estado) {
 export function volverAllamarTurnoPerdido(turno) {
     if (turno.numeroTurno != "No hay Turnos en Cola") {
         turno.estado = "VUELTO A LLAMAR"
-        addTurno('turnosLlamados', turno)
+        agregarInicioCola('turnosLlamados', turno)
     }
 }
 
@@ -75,13 +84,14 @@ export function obtenerTurnosLlamados() {
 export function llamarTurno() {
     let turno = {
         numeroTurno: "No hay Turnos en Cola",
-        estado: "LLAMADO",
+        estado: "sin estado",
     }
     if (getTurnos('turnosPrioritario').length > 0) {
         console.log("atender prioritario")
         turno = removerPrimerTurno('turnosPrioritario')
         turno.asesor = obtenerAsesor()
-        addTurno('turnosLlamados', turno)
+        turno.estado = "LLAMADO"
+        agregarInicioCola('turnosLlamados', turno)
 
     } else {
         console.log("no hay gente en el prioritario")
@@ -92,7 +102,8 @@ export function llamarTurno() {
                 console.log("Atender buena gente")
                 turno = removerPrimerTurno('turnosBuenaGente')
                 turno.asesor = obtenerAsesor()
-                addTurno('turnosLlamados', turno)
+                turno.estado = "LLAMADO"
+                agregarInicioCola('turnosLlamados', turno)
                 turnosAtendidosBuenaGente = turnosAtendidosBuenaGente + 1
             } else {
                 console.log("no los turnos son mayores")
@@ -105,33 +116,35 @@ export function llamarTurno() {
     }
 
     return turno
-
 }
 
 function atenderGenteNormal(turno) {
 
     if (getTurnos("turnosClienteNormal").length > 0) {
         console.log("si hay gente en turno cliente normal")
-        console.log("atender gente cliente normal")
         if (turnosAtendidosClienteNormal < 2) {
             console.log("si el contador de cliente normal es menor a 2")
+            console.log("atender gente cliente normal")
             turno = removerPrimerTurno("turnosClienteNormal")
             turno.asesor = obtenerAsesor()
-            addTurno("turnosLlamados", turno)
+            turno.estado = "LLAMADO"
+            agregarInicioCola("turnosLlamados", turno)
             turnosAtendidosClienteNormal = turnosAtendidosClienteNormal + 1
         } else {
             if (getTurnos("turnosBuenaGente").length > 0) {
                 turno = removerPrimerTurno("turnosBuenaGente")
-                addTurno("turnosLlamados", turno)
+                turno.asesor = obtenerAsesor()
+                turno.estado = "LLAMADO"
+                agregarInicioCola("turnosLlamados", turno)
                 turnosAtendidosBuenaGente = 1
                 turnosAtendidosClienteNormal = 0
             } else {
                 turnosAtendidosClienteNormal = turnosAtendidosClienteNormal + 1
                 turno = removerPrimerTurno("turnosClienteNormal")
                 turno.asesor = obtenerAsesor()
-                addTurno("turnosLlamados", turno)
+                turno.estado = "LLAMADO"
+                agregarInicioCola("turnosLlamados", turno)
             }
-
         }
 
     } else {
@@ -149,13 +162,13 @@ export function pedirTurno(tipo) {
         tipo: tipo
     }
     if (tipo == "prioritario") (
-        addTurno('turnosPrioritario', turno)
+        agregarFinalCola('turnosPrioritario', turno)
     )
     if (tipo == "buenaGente") (
-        addTurno('turnosBuenaGente', turno)
+        agregarFinalCola('turnosBuenaGente', turno)
     )
     if (tipo == "clienteNormal") (
-        addTurno('turnosClienteNormal', turno)
+        agregarFinalCola('turnosClienteNormal', turno)
     )
 
     return turno
